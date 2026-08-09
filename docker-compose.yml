@@ -1,0 +1,17 @@
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ride
+      POSTGRES_USER: ride
+      POSTGRES_PASSWORD: ride
+    ports:
+      - "5432:5432"
+    volumes:
+      - ride_db:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+
+volumes:
+  ride_db:
